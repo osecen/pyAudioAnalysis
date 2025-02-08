@@ -10,3 +10,8 @@ tqdm>=4.52.0
 plotly>=5.3.1
 pandas>=1.2.4
 imblearn
+streamlit>=1.42.0
+pytest>=7.0.0
+pytest-html>=3.1.1
+pytest-cov>=4.1.0
+playwright>=1.40.0

@@ -2,3 +2,38 @@
 *.pyc
 *.npy
 .idea
+
+# Virtual Environment
+venv/
+
+# Logs
+logs/
+
+# Coverage
+.coverage
+
+# macOS System Files
+.DS_Store
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Test coverage
+htmlcov/
+
+# IDE settings
+.vscode/
+.idea/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environment variables
+.env

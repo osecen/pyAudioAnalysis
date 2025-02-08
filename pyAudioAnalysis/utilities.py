@@ -32,32 +32,12 @@ def isNum(x):
 
 def peakdet(v, delta, x = None):
     """
-    Converted from MATLAB script at http://billauer.co.il/peakdet.html
-    
-    Returns two arrays
-    
-    function [maxtab, mintab]=peakdet(v, delta, x)
-    %PEAKDET Detect peaks in a vector
-    %        [MAXTAB, MINTAB] = PEAKDET(V, DELTA) finds the local
-    %        maxima and minima ("peaks") in the vector V.
-    %        MAXTAB and MINTAB consists of two columns. Column 1
-    %        contains indices in V, and column 2 the found values.
-    %      
-    %        With [MAXTAB, MINTAB] = PEAKDET(V, DELTA, X) the indices
-    %        in MAXTAB and MINTAB are replaced with the corresponding
-    %        X-values.
-    %
-    %        A point is considered a maximum peak if it has the maximal
-    %        value, and was preceded (to the left) by a value lower by
-    %        DELTA.
-    
-    % Eli Billauer, 3.4.05
-    % This function is released to the public domain; Any use is allowed.
-    
+    Detect peaks in data based on their amplitude and other features.
     """
+    
     maxtab = []
     mintab = []
-       
+    
     if x is None:
         x = numpy.arange(len(v))
     
@@ -72,8 +52,8 @@ def peakdet(v, delta, x = None):
     if delta <= 0:
         sys.exit('Input argument delta must be positive')
     
-    mn, mx = numpy.Inf, -numpy.Inf
-    mnpos, mxpos = numpy.NaN, numpy.NaN
+    mn, mx = numpy.inf, -numpy.inf
+    mnpos, mxpos = numpy.nan, numpy.nan
     
     lookformax = True
     
@@ -87,17 +67,17 @@ def peakdet(v, delta, x = None):
             mnpos = x[i]
         
         if lookformax:
-            if this < mx-delta:
-                maxtab.append(mxpos)
+            if this < mx - delta:
+                maxtab.append((mxpos, mx))
                 mn = this
                 mnpos = x[i]
                 lookformax = False
         else:
-            if this > mn+delta:
-                mintab.append(mnpos)
+            if this > mn + delta:
+                mintab.append((mnpos, mn))
                 mx = this
                 mxpos = x[i]
                 lookformax = True
- 
+    
     return numpy.array(maxtab), numpy.array(mintab)
 

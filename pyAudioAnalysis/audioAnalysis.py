@@ -4,12 +4,12 @@ import os
 import numpy
 import glob
 import matplotlib.pyplot as plt
-import ShortTermFeatures as sF
-import MidTermFeatures as aF
-import audioTrainTest as aT
-import audioSegmentation as aS
-import audioVisualization as aV
-import audioBasicIO
+from pyAudioAnalysis import ShortTermFeatures as sF
+from pyAudioAnalysis import MidTermFeatures as mF
+from pyAudioAnalysis import audioTrainTest as aT
+from pyAudioAnalysis import audioSegmentation as aS
+from pyAudioAnalysis import audioVisualization as aV
+from pyAudioAnalysis import audioBasicIO
 import scipy.io.wavfile as wavfile
 import matplotlib.patches
 
@@ -35,7 +35,7 @@ def featureExtractionFileWrapper(wav_file, out_file, mt_win, mt_step,
     if not os.path.isfile(wav_file):
         raise Exception("Input audio file not found!")
 
-    aF.mid_feature_extraction_to_file(wav_file, mt_win, mt_step, st_win,
+    mF.mid_feature_extraction_to_file(wav_file, mt_win, mt_step, st_win,
                                       st_step, out_file, True, True, True)
 
 
@@ -44,7 +44,7 @@ def beatExtractionWrapper(wav_file, plot):
         raise Exception("Input audio file not found!")
     [fs, x] = audioBasicIO.read_audio_file(wav_file)
     F, _ = sF.feature_extraction(x, fs, 0.050 * fs, 0.050 * fs)
-    bpm, ratio = aF.beat_extraction(F, 0.050, plot)
+    bpm, ratio = mF.beat_extraction(F, 0.050, plot)
     print("Beat: {0:d} bpm ".format(int(bpm)))
     print("Ratio: {0:.2f} ".format(ratio))
 
@@ -52,7 +52,7 @@ def beatExtractionWrapper(wav_file, plot):
 def featureExtractionDirWrapper(directory, mt_win, mt_step, st_win, st_step):
     if not os.path.isdir(directory):
         raise Exception("Input path not found!")
-    aF.mid_feature_extraction_file_dir(directory, mt_win, mt_step, st_win,
+    mF.mid_feature_extraction_file_dir(directory, mt_win, mt_step, st_win,
                                        st_step, True, True, True)
 
 
